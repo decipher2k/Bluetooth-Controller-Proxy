@@ -10,7 +10,7 @@ You will have to keep the following order to get the client connected:<br>
 -Start the Android client<br>
 <br>
 (Basically, the Android client should be started after the server)<br>
-This procedure has to be repeated after each IP change.<br>
+This procedure has to be repeated after each IP change, and when one of the programs gets closed.<br>
 
 FIFA 22 can be played ok via wifi 5ghz, but for games without input prediction, you should use USB tethering.<br>
 Whe using USB tethering, you should disable mobile data on your mobile phone, or it could drain your mobile data contingent!<br>
