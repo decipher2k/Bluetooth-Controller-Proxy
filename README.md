@@ -20,6 +20,6 @@ If you get asked to upload the app for scanning, please do so! It helps me getti
 <br>
 Technical stuff:<br>
 There is no serverside prediction<br>
-The connection is not secured (an attacker who has inflitrated your network could fake gamepad input at your pc.)<br>
+The connection is not secured (an attacker who has infiltrated your network could fake gamepad input at your pc.)<br>
 The axis are being transmitted using UDP (package loss won't matter, but speed does)<br>
 The buttons are being transmitted using TCP (they are mandatory, and a loss of button press would be fatal)
