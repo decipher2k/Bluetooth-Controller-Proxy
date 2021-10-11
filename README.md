@@ -13,10 +13,11 @@ You will have to keep the following order to get the client connected:<br>
 This procedure has to be repeated after each IP change.<br>
 
 FIFA 22 can be played ok via wifi 5ghz, but for games without input prediction, you should use USB tethering.<br>
+Whe using USB tethering, you should disable mobile data on your mobile phone, or it could drain your mobile data contingent!<br>
 <br>
 When installing the android apk, a warning about the author of the app being unknow will be shown, that's because it uses a self-signed certificate.<br>
 If you get asked to upload the app for scanning, please do so! It helps me getting it trusted by Google.<br>
-Whe using USB tethering, you should disable mobile data on your mobile phone, or it could drain your mobile data contingent!<br>
+
 
 <br>
 Technical stuff:<br>
