@@ -11,8 +11,8 @@ You will have to keep the following order to get the client connected:<br>
 <br>
 (Basically, the Android client should be started after the server)<br>
 This procedure has to be repeated after each IP change.<br>
+
 FIFA 2022 can be played ok via wifi 5ghz, but for games without input prediction, you should use USB tethering.<br>
-This procedure has to be repeated after each IP change.<br>
 <br>
 The android apk will show a warning about the author of the app being unknow, that's because it uses a self-signed certificate.<br>
 If you get asked to upload the app for scanning, please do so! It helps me getting it trusted by Google.<br>
