@@ -10,7 +10,7 @@ You will have to keep the following order to get the client conntected:<br>
 <br>
 (Basically, the Android client should be started after the server)<br>
 This procedure has to be repeated after each IP change.<br>
-FIFA 2022 can be played ok via wifi, but for serious gaming you should use USB tethering.<br>
+FIFA 2022 can be played ok via wifi 5ghz, but for games without input prediction, you should use USB tethering.<br>
 This procedure has to be repeated after each IP change.<br>
 
 <br>
