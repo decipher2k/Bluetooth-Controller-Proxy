@@ -9,5 +9,12 @@ You will have to keep the following order to get the client conntected:<br>
 -Start the Android client<br>
 <br>
 (Basically, the Android client should be started after the server)<br>
-This procedure has to be repeated after each IP change.
+This procedure has to be repeated after each IP change.<br>
+FIFA 2022 can be played ok via wifi, but for serious gaming you should use USB tethering.<br>
+This procedure has to be repeated after each IP change.<br>
 
+<br>
+Technical stuff:<br>
+There is no serverside prediction<br>
+The axis are being transmitted using UDP (package loss won't matter, but speed does)<br>
+The buttons are being transmitted using TCP (they are mandatory, and a loss of button press would be fatal)
