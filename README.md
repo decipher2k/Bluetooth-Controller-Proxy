@@ -11,7 +11,7 @@ FIFA 22 can be played ok via wifi 5ghz, but for games without input prediction, 
 Whe using USB tethering, you should disable mobile data on your mobile phone, or it could drain your mobile data contingent!<br>
 <br>
 When installing the android apk, a warning about the author of the app being unknow will be shown. That's because it uses a self-signed certificate.<br>
-If you get asked to upload the app for scanning, please do so! It helps me getting it trusted by Google.<br>
+If you get asked to upload the app for scanning, please do so! It helps me geting it trusted by Google.<br>
 
 
 <br>
