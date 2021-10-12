@@ -3,7 +3,25 @@ Allows you to use your Bluetooth gamepad on your PC via your mobile phone and Wi
 Nefarius.ViGEm is used for XBox 360 controller emulation.<br>
 <br>
 The sourcecode is still a messs. (don't look at it! you have been warned!) <br>
-
+<br>
+Installation:<br>
+1.) Install the android app<br>
+https://techcult.com/install-apk-using-adb-commands/<br>
+2.) Unzip the Windows server at your gaming PC<br>
+3.) Install the controller driver which can be found in the file "Bluetoot Controller Proxy.zip".<br>
+<br>
+Usage:<br>
+1) Run the android app<br>
+2) Run the Windows server<br>
+3) Map the buttons by clicking on them in the windows server, followed by pressing the according button on the controller<br>
+4a) (optional) Connect your mobile using USB tethering and disable mobile data<br>
+https://www.geeksforgeeks.org/what-is-usb-tethering-and-how-to-enable-it/<br>
+https://www.businessinsider.com/how-to-turn-off-cellular-data-on-android<br>
+4b) Enter your computer's IP at the android app and press "set".<br>
+https://www.businessinsider.com/how-to-find-ip-address-on-windows<br>
+5) Play :D<br>
+<br>
+<br>
 Update:
 There is now an auto reconnect. No need for proper connection handling anymore.
 
