@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity  {
         ((TextView)findViewById(R.id.editTextTextPersonName)).setText(Globals.serverIP);
         Thread.setDefaultUncaughtExceptionHandler(h);
         new MyThread1().start();
+        new PingThread().start();
+
     }
 
     public static boolean blocked=false;
@@ -169,6 +171,10 @@ public class MainActivity extends AppCompatActivity  {
                     button=false;
             }
         }
+        if((error && errorCount >= 2 && port==23002) || (error && errorCount >= 20 && port==23002 && msg[1]==0))
+        {
+            socketClose=true;
+        }
     }
 
     Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
@@ -178,7 +184,7 @@ public class MainActivity extends AppCompatActivity  {
         }
     };
 
-    public void clickSetServerIP(View view) {
+    public void clickSetServerIP(View view) throws InterruptedException {
 
 
         String filename = "settings";
@@ -190,16 +196,24 @@ public class MainActivity extends AppCompatActivity  {
         }
         Globals.serverIP=fileContents;
 
+        running=false;
         ds = null;
+        try {
+            if (ds1 != null)
+                ds1.close();
+        }catch (Exception e){}
         ds1 = null;
+
 
             Intent i = getApplicationContext().getPackageManager()
                     .getLaunchIntentForPackage(getApplicationContext().getPackageName() );
 
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK );
             startActivity(i);
+            Thread.sleep(3000);
+            running=true;
             new MyThread1().start();
-
+            new PingThread().start();
 
 
 
@@ -233,6 +247,35 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
+    class PingThread extends Thread {
+
+        private byte[] to;
+        private int port;
+
+        public PingThread() {
+            ;
+        }
+
+        @Override
+        public void run() {
+            while(running)
+            {
+                byte[] msg= {0,0,0};
+
+                MyThread t = new MyThread(msg, 23002);
+                t.setUncaughtExceptionHandler(h);
+                t.start();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static boolean running=true;
+    static boolean socketClose=false;
     public class MyThread1 extends Thread {
 
         private byte[] to;
@@ -241,11 +284,13 @@ public class MainActivity extends AppCompatActivity  {
 
         }
 
+
+
         @Override
         public void run() {
 
 
-            while(true)
+            while(running)
             {
 
               /*  if(ds==null)
@@ -258,14 +303,19 @@ public class MainActivity extends AppCompatActivity  {
 
                     }
                 }*/
-                if(ds1==null)
-                {
-                    try {
-                        ds1 = new Socket();
-                        ds1.connect(new InetSocketAddress(Globals.serverIP, 23002), 0);
-                    } catch (Exception e) {
-                        runOnUiThread(() -> Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show());
+                try {
+                    if(ds1==null || socketClose)
+                    {
+                        try {
+                            ds1 = new Socket();
+                            ds1.connect(new InetSocketAddress(Globals.serverIP, 23002), 0);
+                            socketClose=false;
+                        } catch (Exception e) {
+                          //  runOnUiThread(() -> Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show());
+                        }
                     }
+                } catch (Exception e) {
+                    ds1=null;
                 }
                 try {
                     MainActivity.blocked=false;
@@ -289,6 +339,7 @@ public class MainActivity extends AppCompatActivity  {
                         t.start();
                         changed=false;
                     }
+
 
                     Thread.sleep(50);
 

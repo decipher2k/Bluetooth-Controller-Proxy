@@ -149,7 +149,7 @@ namespace WindowsFormsApp2
 
         }
 
-
+        bool reconnect = true;
 
         private void udpClientThrdBn()
         {
@@ -163,7 +163,7 @@ namespace WindowsFormsApp2
             
             while (cont)
                 {
-                bool reconnect = false;
+                
                 TcpClient client=null;
                 udpc1.Start();
                 
@@ -172,9 +172,9 @@ namespace WindowsFormsApp2
                    client = udpc1.AcceptTcpClient();  //if a connection exists, the server will accept it
 
                 if(client!=null)
-                { 
-
-                NetworkStream ns = client.GetStream();
+                {
+                    reconnect = false;
+                    NetworkStream ns = client.GetStream();
 
 
                 while(client.Connected && !reconnect)
@@ -182,13 +182,15 @@ namespace WindowsFormsApp2
                         
                 byte[] data = new byte[3];
                         ns.ReadTimeout = -1;
+                        
                 int ret=ns.Read(data, 0, data.Length);
                         if (ret == 0)
                             reconnect = true;
+
                         if (ret > 2)
                         {
 
-                            if (mapButtons)
+                            if (mapButtons && data[0]!=0)
                             {
                                 doMapButtons((int)data[0]);
                             }
@@ -298,6 +300,7 @@ namespace WindowsFormsApp2
                                             controller.SetButtonState(Xbox360Button.Back, false);
                                     }
 
+
                                 }
 
                                 //controller.SetAxisValue(Xbox360Axis.LeftThumbY, 20000);
@@ -340,6 +343,7 @@ namespace WindowsFormsApp2
                 Settings.buttonMapping.L2 = v;
             mapButtons = false;
             Settings.SerializeNow();
+            WriteTextSafe(label2, "Button " + buttonToMap + " has been mapped.");
         }
 
         public bool mapButtons=false;
@@ -348,6 +352,19 @@ namespace WindowsFormsApp2
         ViGEmClient client = new ViGEmClient();
 
         IXbox360Controller controller;
+
+        public void WriteTextSafe(Control control, string text)
+        {
+            if (control.InvokeRequired)
+            {
+                Action safeWrite = delegate { WriteTextSafe(control, text); };
+                control.Invoke(safeWrite);
+            }
+            else
+            {
+                control.Text = text;
+            }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -362,7 +379,7 @@ namespace WindowsFormsApp2
             controller = client.CreateXbox360Controller();
             controller.Connect();
 
-
+            backgroundWorker1.RunWorkerAsync();
 
 
 
@@ -382,7 +399,21 @@ namespace WindowsFormsApp2
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            
+            while(true)
+            {
+                if (mapButtons == true)
+                    WriteTextSafe(label2, "Please click Button " + buttonToMap + " on the controller");
+
+                Thread.Sleep(3000);
+                if(reconnect)
+                {
+                    WriteTextSafe(label3, "Disconnected");
+                }
+                else
+                {
+                    WriteTextSafe(label3, "Connected");
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
