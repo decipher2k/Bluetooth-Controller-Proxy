@@ -11,15 +11,15 @@ https://techcult.com/install-apk-using-adb-commands/<br>
 3.) Install the controller driver which can be found in the file "Bluetoot Controller Proxy.zip".<br>
 <br>
 Usage:<br>
-1) Run the android app<br>
-2) Run the Windows server<br>
-3) Map the buttons by clicking on them in the windows server, followed by pressing the according button on the controller<br>
-4a) (optional) Connect your mobile using USB tethering and disable mobile data<br>
+1.) Run the android app<br>
+2.) Run the Windows server<br>
+3.) Map the buttons by clicking on them in the windows server, followed by pressing the according button on the controller<br>
+4.) (optional) Connect your mobile using USB tethering and disable mobile data<br>
 https://www.geeksforgeeks.org/what-is-usb-tethering-and-how-to-enable-it/<br>
 https://www.businessinsider.com/how-to-turn-off-cellular-data-on-android<br>
-4b) Enter your computer's IP at the android app and press "set".<br>
+5.) Enter your computer's IP at the android app and press "set".<br>
 https://www.businessinsider.com/how-to-find-ip-address-on-windows<br>
-5) Play :D<br>
+6.) Play :D<br>
 <br>
 <br>
 Update:
