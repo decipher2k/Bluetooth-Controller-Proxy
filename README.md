@@ -13,7 +13,7 @@ https://techcult.com/install-apk-using-adb-commands/<br>
 Usage:<br>
 1.) Run the android app<br>
 2.) Run the Windows server<br>
-3.) Map the buttons by clicking on them in the windows server, followed by pressing the according button on the controller<br>
+3.) Map the buttons by clicking on them in the Windows server, followed by pressing the according button on the controller<br>
 4.) (optional) Connect your mobile using USB tethering and disable mobile data<br>
 https://www.geeksforgeeks.org/what-is-usb-tethering-and-how-to-enable-it/<br>
 https://www.businessinsider.com/how-to-turn-off-cellular-data-on-android<br>
