@@ -2,7 +2,7 @@
 Allows you to use your Bluetooth gamepad on your PC via your mobile phone and WiFi or USB tethering. (so you don't need a Bluetooth dongle)<br>
 Nefarius.ViGEm is used for XBox 360 controller emulation.<br>
 <br>
-The sourcecode is still a messs. (don't look at it! you have been warned!) <br>
+The sourcecode is still a mess. (don't look at it! you have been warned!) <br>
 <br>
 Installation:<br>
 1.) Install the android app<br>
