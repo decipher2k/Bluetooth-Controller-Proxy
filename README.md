@@ -37,8 +37,8 @@ Technical stuff:<br>
 There is no serverside prediction<br>
 The connection is not secured (an attacker who has infiltrated your network could fake gamepad input at your pc.)<br>
 The axis are being transmitted using UDP (package loss won't matter, but speed does)<br>
-The buttons are being transmitted using TCP (they are mandatory, and a loss of button press would be fatal)
-
-Todo:
-Add autodiscovery
+The buttons are being transmitted using TCP (they are mandatory, and a loss of button press would be fatal)<br>
+<br>
+Todo:<br>
+Add autodiscovery<br>
 Clean up code
