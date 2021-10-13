@@ -4,7 +4,7 @@ Nefarius.ViGEm is used for XBox 360 controller emulation.<br>
 <br>
 The sourcecode is still a mess. (don't look at it! you have been warned!) <br>
 <br>
-There are now two versions existing:<br>
+There are now two versions available:<br>
 Reliable Input: Buttons will allways be pressed, but input is slower<br>
 Fast Input: Fast input, but sometimes button presses can get lost<br>
 <br>
