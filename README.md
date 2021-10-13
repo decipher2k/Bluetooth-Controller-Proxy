@@ -26,9 +26,6 @@ https://www.businessinsider.com/how-to-find-ip-address-on-windows<br>
 6.) Play :D<br>
 <br>
 <br>
-Update:
-There is now an auto reconnect. No need for proper connection handling anymore.
-
 FIFA 22 can be played ok via wifi 5ghz, but for games without input prediction, you should use USB tethering.<br>
 Whe using USB tethering, you should disable mobile data on your mobile phone, or it could drain your mobile data contingent!<br>
 <br>
