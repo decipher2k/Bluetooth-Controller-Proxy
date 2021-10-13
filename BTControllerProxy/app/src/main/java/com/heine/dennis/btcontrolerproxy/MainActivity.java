@@ -1,5 +1,8 @@
 package com.heine.dennis.btcontrolerproxy;
 
+import static android.view.MotionEvent.ACTION_DOWN;
+import static android.view.MotionEvent.ACTION_MOVE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +25,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -30,6 +34,12 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity  {
 
 
+    @Override
+    protected void onDestroy()
+    {
+        running=false;
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +76,7 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
+
     public static boolean blocked=false;
 
 
@@ -78,7 +89,7 @@ public class MainActivity extends AppCompatActivity  {
     {
         try {
             if ((!blocked && !button)||(!button)) {
-                blocked = true;
+
 
 
                 byte[] ipAddr = new byte[]{(byte) 192, (byte) 168, (byte) 2, (byte) 72};
@@ -113,7 +124,7 @@ public class MainActivity extends AppCompatActivity  {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                blocked = true;
+
             }
         }catch (Exception e)
         {
@@ -152,11 +163,35 @@ public class MainActivity extends AppCompatActivity  {
 
 
 
-
+                    try {
                     if(port==23000)
                         ds.getOutputStream().write(msg);
                     else
                         ds1.getOutputStream().write(msg);
+
+                        ds1.setSoTimeout(1000);
+
+                            int ret = ds1.getInputStream().read();
+
+                            if(ret==-1&&msg[0]!=0)
+                                throw new Exception();
+                            else if(ret==-1)
+                            {
+                               socketClose=true;
+                            }
+
+                        }catch (Exception ste)
+                        {
+                            if(msg[0]==0)
+                            {
+                               socketClose=true;
+                            }
+                            else {
+                                blocked = false;
+                                sendMsgThrd(msg, port);
+                            }
+                        }
+
                     if(keyDown.containsKey((int)msg[0]) && port==23002)
                         keyDown.remove((int)msg[0]);
 
@@ -175,6 +210,8 @@ public class MainActivity extends AppCompatActivity  {
         {
             socketClose=true;
         }
+        if(port==23002)
+            blocked=false;
     }
 
     Thread.UncaughtExceptionHandler h = new Thread.UncaughtExceptionHandler() {
@@ -244,6 +281,7 @@ public class MainActivity extends AppCompatActivity  {
                 sendMsgThrd(to,port);
             else
                 sendMsgThrdUDP(to,port);
+
         }
     }
 
@@ -318,7 +356,7 @@ public class MainActivity extends AppCompatActivity  {
                     ds1=null;
                 }
                 try {
-                    MainActivity.blocked=false;
+
 
                     byte[] msg = new byte[9];
 
@@ -333,13 +371,13 @@ public class MainActivity extends AppCompatActivity  {
 
                     msg[8]=0;
 
-                    if(changed) {
+                 /*   if(changed && !blocked) {
                         MyThread t = new MyThread(msg, 23000);
                         t.setUncaughtExceptionHandler(h);
                         t.start();
                         changed=false;
                     }
-
+*/
 
                     Thread.sleep(50);
 
@@ -361,12 +399,20 @@ public class MainActivity extends AppCompatActivity  {
 
     public float xHist=0;
     public float yHist=0;
+
+
+
     @Override
     public boolean onGenericMotionEvent(MotionEvent event) {
-        super.onGenericMotionEvent(event);
+        //super.onGenericMotionEvent(event);
         changed=true;
+        if(event.getAction()!=ACTION_MOVE)
+            return true;
+
         float x = event.getAxisValue(0);
         float y = event.getAxisValue(1);
+
+
 
         if(event.getHistorySize()>0)
             if((event.getHistoricalAxisValue(0,0)==x && event.getHistoricalAxisValue(1,0)==y))
@@ -389,10 +435,11 @@ public class MainActivity extends AppCompatActivity  {
 
         msg[8]=0;
 
-            //MyThread t = new MyThread(msg, 23000);
-            //t.setUncaughtExceptionHandler(h);
-            //t.start();
-
+        if(!blocked) {
+            MyThread t = new MyThread(msg, 23000);
+            t.setUncaughtExceptionHandler(h);
+            t.start();
+        }
         return true;
     }
 
@@ -403,7 +450,7 @@ public class MainActivity extends AppCompatActivity  {
 
         if(!keyDown.containsKey(keyCode) || true) {
             keyDown.put(keyCode, new Timestamp(new Date().getTime()));
-
+            blocked=true;
             byte[] msg = new byte[3];
 
             msg[0] = (byte) keyCode;
@@ -420,7 +467,7 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         byte[] msg = new byte[3];
-
+        blocked=true;
         msg[0] = (byte)  keyCode;
         msg[1] = (byte)  0;
         msg[2]=1;
