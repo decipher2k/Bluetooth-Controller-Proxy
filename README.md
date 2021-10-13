@@ -11,7 +11,7 @@ Fast Input: Fast input, but sometimes button presses can get lost<br>
 Installation:<br>
 1.) Install the android app (the .apk file)<br>
 https://techcult.com/install-apk-using-adb-commands/<br>
-2.) Unzip the Windows server at your gaming PC<br>
+2.) Unzip the Windows server on your gaming PC<br>
 3.) Install the controller driver (Controller Emulator Driver.msi)<br>
 <br>
 Usage:<br>
