@@ -157,6 +157,32 @@ public class MainActivity extends AppCompatActivity  {
                         ds.getOutputStream().write(msg);
                     else
                         ds1.getOutputStream().write(msg);
+<<<<<<< Updated upstream
+=======
+
+                        ds1.setSoTimeout(1000);
+
+                            int ret = ds1.getInputStream().read();
+
+                            if(ret==-1&&msg[0]!=0)
+                                throw new Exception();
+                            else if(ret==-1)
+                            {
+                               socketClose=true;
+                               blocked=false;
+                            }
+
+                        }catch (Exception ste)
+                        {
+
+                               socketClose=true;
+                                blocked = false;
+
+                                ///sendMsgThrd(msg, port);
+
+                        }
+
+>>>>>>> Stashed changes
                     if(keyDown.containsKey((int)msg[0]) && port==23002)
                         keyDown.remove((int)msg[0]);
 
@@ -173,7 +199,7 @@ public class MainActivity extends AppCompatActivity  {
         }
         if((error && errorCount >= 2 && port==23002) || (error && errorCount >= 20 && port==23002 && msg[1]==0))
         {
-            socketClose=true;
+           // socketClose=true;
         }
     }
 
@@ -307,6 +333,8 @@ public class MainActivity extends AppCompatActivity  {
                     if(ds1==null || socketClose)
                     {
                         try {
+                            if(ds1!=null)
+                                ds1.close();
                             ds1 = new Socket();
                             ds1.connect(new InetSocketAddress(Globals.serverIP, 23002), 0);
                             socketClose=false;
@@ -401,7 +429,7 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
-        if(!keyDown.containsKey(keyCode) || true) {
+        if(!keyDown.containsKey(keyCode)) {
             keyDown.put(keyCode, new Timestamp(new Date().getTime()));
 
             byte[] msg = new byte[3];

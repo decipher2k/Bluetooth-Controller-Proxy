@@ -17,7 +17,9 @@ using Nefarius.ViGEm.Client.Targets.Xbox360;
 namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
-    {   
+    {
+
+        bool running = true;
         public Form1()
         {
             InitializeComponent();
@@ -45,7 +47,7 @@ namespace WindowsFormsApp2
             UdpClient udpc = new UdpClient(23000);
             var remoteEP = new IPEndPoint(IPAddress.Any, 23000);
             bool cont = true;
-            while (cont)
+            while (running)
             {
 
                 byte[] data = udpc.Receive(ref remoteEP);
@@ -161,7 +163,7 @@ namespace WindowsFormsApp2
 
             bool cont = true;
             
-            while (cont)
+            while (running)
                 {
                 
                 TcpClient client=null;
@@ -366,6 +368,129 @@ namespace WindowsFormsApp2
             }
         }
 
+<<<<<<< Updated upstream
+=======
+
+        List<int> toPress = new List<int>();
+        List<int> toRelease = new List<int>();
+
+
+        public void pressButton(int bn, int press)
+        {
+            int iX = bn;
+            int iY = press;
+
+            if (iX == Settings.buttonMapping.A)
+            {
+                if (iY == 1)
+                    controller.SetButtonState(Xbox360Button.A, true);
+                else
+                    controller.SetButtonState(Xbox360Button.A, false);
+            }
+            else if (iX == Settings.buttonMapping.B)
+            {
+                if (iY == 1)
+                    controller.SetButtonState(Xbox360Button.B, true);
+                else
+                    controller.SetButtonState(Xbox360Button.B, false);
+            }
+            else if (iX == Settings.buttonMapping.X)
+            {
+                if (iY == 1)
+                    controller.SetButtonState(Xbox360Button.X, true);
+                else
+                    controller.SetButtonState(Xbox360Button.X, false);
+            }
+
+            else if (iX == Settings.buttonMapping.Y)
+            {
+                if (iY == 1)
+                    controller.SetButtonState(Xbox360Button.Y, true);
+                else
+                    controller.SetButtonState(Xbox360Button.Y, false);
+            }
+
+            else if (iX == Settings.buttonMapping.L2)
+            {
+                if (iY == 1)
+                    controller.SetButtonState(Xbox360Button.LeftShoulder, true);
+                else
+                    controller.SetButtonState(Xbox360Button.LeftShoulder, false);
+            }
+
+            else if (iX == Settings.buttonMapping.R2s)
+            {
+                if (iY == 1)
+                    controller.SetButtonState(Xbox360Button.RightShoulder, true);
+                else
+                    controller.SetButtonState(Xbox360Button.RightShoulder, false);
+            }
+
+
+            else if (iX == Settings.buttonMapping.Start)
+            {
+                if (iY == 1)
+                    controller.SetButtonState(Xbox360Button.Start, true);
+                else
+                    controller.SetButtonState(Xbox360Button.Start, false);
+            }
+
+            else if (iX == Settings.buttonMapping.Select)
+            {
+                if (iY == 1)
+                    controller.SetButtonState(Xbox360Button.Back, true);
+                else
+                    controller.SetButtonState(Xbox360Button.Back, false);
+            }
+
+        }
+
+        public void sendReportThrd()
+        {
+            while(running)
+            {
+                //while (blockedCount > 0)
+                  //  Thread.Sleep(10);
+
+                //   controller.SubmitReport();
+                blocked1 = true;
+                controller.SetAxisValue(Xbox360Axis.LeftThumbX, (short)(lastX * 32000.0));
+                Thread.Sleep(2);
+                controller.SetAxisValue(Xbox360Axis.LeftThumbY, (short)(lastY * 32000.0));
+                Thread.Sleep(2);
+
+                List<int> tmpPress = toPress.ToList<int>();
+                List<int> tmpRelease = toRelease.ToList<int>();
+
+                foreach(int bn in tmpPress)
+                {
+                    if(tmpRelease.Contains(bn))
+                    {
+                        pressButton(bn, 1);
+                        Thread.Sleep(50);
+                        pressButton(bn, 0);
+                        toPress.Remove(bn);
+                        toRelease.Remove(bn);
+                    }
+                    else
+                    {
+                        pressButton(bn, 1);
+                        toPress.Remove(bn);
+                    }                    
+                }
+
+                foreach(int bn in tmpRelease)
+                {
+                    pressButton(bn, 0);
+                    toRelease.Remove(bn);
+                }
+
+                blocked1 = false;
+                Thread.Sleep(2);
+            }
+        }
+
+>>>>>>> Stashed changes
         private void Form1_Load(object sender, EventArgs e)
         {
             Settings.DeSerializeNow();

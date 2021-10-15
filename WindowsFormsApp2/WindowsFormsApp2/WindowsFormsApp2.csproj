@@ -39,6 +39,10 @@
     <ApplicationIcon>gamepad_icon_144316.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nefarius.ViGEm.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\source\repos\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Nefarius.ViGEm.Client.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -89,12 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Desktop\ViGEm.NET-master\ViGEmClient\ViGEmClient.NET.csproj">
-      <Project>{aa18ebcf-7e9d-4bc5-8760-e8c6e9a773e5}</Project>
-      <Name>ViGEmClient.NET</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="gamepad_icon_144316.ico" />
