@@ -16,7 +16,7 @@ https://techcult.com/install-apk-using-adb-commands/<br>
 3.) Install the controller driver (Controller Emulator Driver.msi)<br>
 <br>
 Usage:<br>
-1.) Run the android app<br>
+1.) Run the Android app<br>
 2.) Run the Windows server<br>
 3.) Map the buttons by clicking on them in the Windows server, followed by pressing the according button on the controller<br>
 4.) (optional) Connect your mobile using USB tethering and disable mobile data<br>
