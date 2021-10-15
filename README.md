@@ -22,7 +22,7 @@ Usage:<br>
 4.) (optional) Connect your mobile using USB tethering and disable mobile data<br>
 https://www.geeksforgeeks.org/what-is-usb-tethering-and-how-to-enable-it/<br>
 https://www.businessinsider.com/how-to-turn-off-cellular-data-on-android<br>
-5.) Enter your computer's IP in the android app and press "set"<br>
+5.) Enter your computer's IP in the android app and press "Connect"<br>
 https://www.businessinsider.com/how-to-find-ip-address-on-windows<br>
 6.) Play :D<br>
 <br>
