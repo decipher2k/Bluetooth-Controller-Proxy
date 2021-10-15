@@ -1,7 +1,6 @@
 C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe.config
 C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
 C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.pdb
-C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Nefarius.ViGEm.Client.dll
 C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Nefarius.ViGEm.Client.pdb
 C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form1.resources
 C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
@@ -11,3 +10,16 @@ C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsF
 C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
 C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
 C:\Users\denni\source\repos\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.AssemblyReference.cache
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe.config
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.exe
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Nefarius.ViGEm.Client.dll
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\Nefarius.ViGEm.Client.pdb
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.AssemblyReference.cache
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Form1.resources
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.Properties.Resources.resources
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.GenerateResource.cache
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CoreCompileInputs.cache
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.csproj.CopyComplete
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.exe
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\obj\Debug\WindowsFormsApp2.pdb
+C:\Users\denni\Documents\GitHub\Bluetooth-Controller-Proxy\WindowsFormsApp2\WindowsFormsApp2\bin\Debug\WindowsFormsApp2.pdb
