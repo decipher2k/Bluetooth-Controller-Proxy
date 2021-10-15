@@ -10,7 +10,7 @@ Reliable Input: Buttons will allways be pressed, but input is slower<br>
 Fast Input: Fast input, but sometimes button presses can get lost<br>
 <br>
 Installation:<br>
-1.) Install the android app (the .apk file)<br>
+1.) Install the Android app (the .apk file)<br>
 https://techcult.com/install-apk-using-adb-commands/<br>
 2.) Unzip the Windows server on your gaming PC<br>
 3.) Install the controller driver (Controller Emulator Driver.msi)<br>
