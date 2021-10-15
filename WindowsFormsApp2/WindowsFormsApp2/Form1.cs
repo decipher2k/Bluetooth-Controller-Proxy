@@ -41,6 +41,9 @@ namespace WindowsFormsApp2
         static TcpListener udpc1;
 
 
+        public float lastX = 0.0f;
+        public float lastY = 0.0f;
+
 
         private void udpClientThrdX()
         {
@@ -49,7 +52,7 @@ namespace WindowsFormsApp2
             bool cont = true;
             while (running)
             {
-
+                
                 byte[] data = udpc.Receive(ref remoteEP);
                 
                 byte[] tmpX = new byte[4];
@@ -64,15 +67,22 @@ namespace WindowsFormsApp2
 
                 float valY = byteArrayToFloat(tmpY) * -1;
 
+               
+
+                lastX = valX;
+                lastY = valY;
+              /*      blocked1 = true;
                 controller.SetAxisValue(Xbox360Axis.LeftThumbX, (short)(valX * 32000.0));
+               // Thread.Sleep(10);
                 controller.SetAxisValue(Xbox360Axis.LeftThumbY, (short)(valY * 32000.0));
-
+                //Thread.Sleep(10);
+                blocked1 = false;
                 //controller.SetAxisValue(Xbox360Axis.LeftThumbY, 20000);
-
+              */
 
                 // MessageBox.Show(((float)data[0]).ToString() + "//" + data[1].ToString());
 
-                System.Threading.Thread.Sleep(5);
+
 
                 // listen on port 11000
 
@@ -82,9 +92,9 @@ namespace WindowsFormsApp2
 
         }
 
+        public static int blockedCount = 0;
+        public static bool blocked1 = false;
 
-
-      
         private void udpClientThrdY()
         {
             UdpClient udpc = new UdpClient(23001);
@@ -179,139 +189,99 @@ namespace WindowsFormsApp2
                     NetworkStream ns = client.GetStream();
 
 
-                while(client.Connected && !reconnect)
-                    { 
-                        
-                byte[] data = new byte[3];
+                    while (client.Connected && !reconnect)
+                    {
+
+                        byte[] data = new byte[3];
                         ns.ReadTimeout = -1;
-                        
-                int ret=ns.Read(data, 0, data.Length);
+                        try { 
+                int ret = ns.Read(data, 0, data.Length);
                         if (ret == 0)
                             reconnect = true;
-
-                        if (ret > 2)
+                        else
+                            ns.Write(new byte[] { 1 }, 0, 1);
+                    }catch(Exception ex)
+                    {
+                            reconnect = true;
+                    }
+                    //    while (blocked1)
+                      //      Thread.Sleep(10);
+                        
+                        try
                         {
-
-                            if (mapButtons && data[0]!=0)
+                            
+                            if (true)
                             {
-                                doMapButtons((int)data[0]);
-                            }
-                            else
-                            {
-                                int iX = data[0];
-                                int iY = data[1];
-                                int type = data[2];
-
-                                if (type == 0)
+                                if(data[0]!=0)
+                                    blockedCount++;
+                                if (mapButtons && data[0] != 0)
                                 {
-                                    if (iX >= 140 && iX <= 255)
-                                    {
-                                        short valX = -32000;
-                                        controller.SetAxisValue(Xbox360Axis.LeftThumbX, valX);
-                                    }
-                                    else if (iX > 0 && iX <= 100)
-                                    {
-                                        short valX = 32000;
-                                        controller.SetAxisValue(Xbox360Axis.LeftThumbX, valX);
-                                    }
-                                    else
-                                    {
-                                        short valX = 0;
-                                        controller.SetAxisValue(Xbox360Axis.LeftThumbX, valX);
-                                    }
-
-                                    if (iY >= 140 & iY <= 255)
-                                    {
-                                        short valX = 32000;
-                                        controller.SetAxisValue(Xbox360Axis.LeftThumbY, valX);
-                                    }
-                                    else if (iY > 0 && iY <= 100)
-                                    {
-                                        short valX = -32000;
-                                        controller.SetAxisValue(Xbox360Axis.LeftThumbY, valX);
-                                    }
-                                    else
-                                    {
-                                        short valX = 0;
-                                        controller.SetAxisValue(Xbox360Axis.LeftThumbY, valX);
-                                    }
+                                    doMapButtons((int)data[0]);
                                 }
                                 else
                                 {
+                                    int iX = data[0];
+                                    int iY = data[1];
+                                    int type = data[2];
 
-                                    if (iX == Settings.buttonMapping.A)
+                                    if (type == 0)
                                     {
-                                        if (iY == 1)
-                                            controller.SetButtonState(Xbox360Button.A, true);
+
+                                        if (iX >= 140 && iX <= 255)
+                                        {
+                                            short valX = -32000;
+                                            controller.SetAxisValue(Xbox360Axis.LeftThumbX, valX);
+                                        }
+                                        else if (iX > 0 && iX <= 100)
+                                        {
+                                            short valX = 32000;
+                                            controller.SetAxisValue(Xbox360Axis.LeftThumbX, valX);
+                                        }
                                         else
-                                            controller.SetButtonState(Xbox360Button.A, false);
+                                        {
+                                            short valX = 0;
+                                            controller.SetAxisValue(Xbox360Axis.LeftThumbX, valX);
+                                        }
+
+                                        if (iY >= 140 & iY <= 255)
+                                        {
+                                            short valX = 32000;
+                                            controller.SetAxisValue(Xbox360Axis.LeftThumbY, valX);
+                                        }
+                                        else if (iY > 0 && iY <= 100)
+                                        {
+                                            short valX = -32000;
+                                            controller.SetAxisValue(Xbox360Axis.LeftThumbY, valX);
+                                        }
+                                        else
+                                        {
+                                            short valX = 0;
+                                            controller.SetAxisValue(Xbox360Axis.LeftThumbY, valX);
+                                        }
                                     }
-                                    else if (iX == Settings.buttonMapping.B)
+                                    else
                                     {
+                                       // Thread.Sleep(10);
+
                                         if (iY == 1)
-                                            controller.SetButtonState(Xbox360Button.B, true);
+                                            toPress.Add(iX);
                                         else
-                                            controller.SetButtonState(Xbox360Button.B, false);
+                                            toRelease.Add(iX);
+                                        
+                                        
+                                        blockedCount--;
+
                                     }
-                                    else if (iX == Settings.buttonMapping.X)
-                                    {
-                                        if (iY == 1)
-                                            controller.SetButtonState(Xbox360Button.X, true);
-                                        else
-                                            controller.SetButtonState(Xbox360Button.X, false);
-                                    }
+                                   
 
-                                    else if (iX == Settings.buttonMapping.Y)
-                                    {
-                                        if (iY == 1)
-                                            controller.SetButtonState(Xbox360Button.Y, true);
-                                        else
-                                            controller.SetButtonState(Xbox360Button.Y, false);
-                                    }
-
-                                    else if (iX == Settings.buttonMapping.L2)
-                                    {
-                                        if (iY == 1)
-                                            controller.SetButtonState(Xbox360Button.LeftShoulder, true);
-                                        else
-                                            controller.SetButtonState(Xbox360Button.LeftShoulder, false);
-                                    }
-
-                                    else if (iX == Settings.buttonMapping.R2s)
-                                    {
-                                        if (iY == 1)
-                                            controller.SetButtonState(Xbox360Button.RightShoulder, true);
-                                        else
-                                            controller.SetButtonState(Xbox360Button.RightShoulder, false);
-                                    }
+                                    //controller.SetAxisValue(Xbox360Axis.LeftThumbY, 20000);
 
 
-                                    else if (iX == Settings.buttonMapping.Start)
-                                    {
-                                        if (iY == 1)
-                                            controller.SetButtonState(Xbox360Button.Start, true);
-                                        else
-                                            controller.SetButtonState(Xbox360Button.Start, false);
-                                    }
-
-                                    else if (iX == Settings.buttonMapping.Select)
-                                    {
-                                        if (iY == 1)
-                                            controller.SetButtonState(Xbox360Button.Back, true);
-                                        else
-                                            controller.SetButtonState(Xbox360Button.Back, false);
-                                    }
-
-
+                                    // MessageBox.Show(((float)data[0]).ToString() + "//" + data[1].ToString());
                                 }
 
-                                //controller.SetAxisValue(Xbox360Axis.LeftThumbY, 20000);
-
-
-                                // MessageBox.Show(((float)data[0]).ToString() + "//" + data[1].ToString());
                             }
-
-                        }
+                        }catch(Exception ex) { blockedCount=0; }
                         // listen on port 11000
                     }
                 }
@@ -368,8 +338,6 @@ namespace WindowsFormsApp2
             }
         }
 
-<<<<<<< Updated upstream
-=======
 
         List<int> toPress = new List<int>();
         List<int> toRelease = new List<int>();
@@ -490,14 +458,13 @@ namespace WindowsFormsApp2
             }
         }
 
->>>>>>> Stashed changes
         private void Form1_Load(object sender, EventArgs e)
         {
             Settings.DeSerializeNow();
 
-            udpc = new TcpListener(IPAddress.Any,23000);
+            //udpc = new TcpListener(IPAddress.Any,23000);
             udpc1 = new TcpListener(IPAddress.Any,23002);
-            udpc.Start();
+            //udpc.Start();
             udpc1.Start();
 
 
@@ -507,9 +474,13 @@ namespace WindowsFormsApp2
             backgroundWorker1.RunWorkerAsync();
 
 
-
+            controller.AutoSubmitReport = true;
             System.Threading.Thread t = new Thread(udpClientThrdX);
             t.Start();
+
+            System.Threading.Thread t3 = new Thread(sendReportThrd);
+            t3.Start();
+            
 
             System.Threading.Thread t2 = new Thread(udpClientThrdBn);
             t2.Start();
