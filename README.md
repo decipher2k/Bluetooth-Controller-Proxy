@@ -4,7 +4,7 @@ Nefarius.ViGEm is used for XBox 360 controller emulation.<br>
 <br>
 The sourcecode is still a mess. (don't look at it! you have been warned!) <br>
 <br>
-There are now two versions available:<br>
+There are now three versions available:<br>
 Optimized Input:Should provide the best experience<br>
 Reliable Input: Buttons will allways be pressed, but input is slower<br>
 Fast Input: Fast input, but sometimes button presses can get lost<br>
@@ -29,9 +29,7 @@ https://www.businessinsider.com/how-to-find-ip-address-on-windows<br>
 <br>
 FIFA 22 can be played ok via wifi 5ghz, but for games without input prediction, you should use USB tethering.<br>
 Whe using USB tethering, you should disable mobile data on your mobile phone, or it could drain your mobile data contingent!<br>
-<br>
-When installing the android apk, a warning about the author of the app being unknow will be shown. That's because it uses a self-signed certificate.<br>
-If you get asked to upload the app for scanning, please do so! It helps me geting it trusted by Google.<br>
+
 
 
 <br>
